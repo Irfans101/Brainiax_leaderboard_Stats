@@ -6,18 +6,58 @@ const credentialsPath = path.resolve(__dirname, "..", "credentials.json");
 
 const hasCredentials = fs.existsSync(credentialsPath);
 
+function loadServiceAccountCredentials() {
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
+    try {
+      return JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+    } catch (error) {
+      console.warn("Failed to parse GOOGLE_SERVICE_ACCOUNT_JSON. Falling back to local file if available.");
+    }
+  }
+
+  if (hasCredentials) {
+    return credentialsPath;
+  }
+
+  return null;
+}
+
+const serviceAccountCredentials = loadServiceAccountCredentials();
+
 let warnedMissingCredentials = false;
 
-const auth = new google.auth.GoogleAuth({
-  keyFile: credentialsPath,
-  scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"]
-});
+const auth =
+  serviceAccountCredentials && typeof serviceAccountCredentials === "string"
+    ? new google.auth.GoogleAuth({
+        keyFile: serviceAccountCredentials,
+        scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+      })
+    : serviceAccountCredentials
+      ? new google.auth.GoogleAuth({
+          credentials: serviceAccountCredentials,
+          scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+        })
+      : null;
 
 async function getSalesData() {
-  if (!hasCredentials || !process.env.GOOGLE_SHEET_ID) {
+  if (!auth || !process.env.GOOGLE_SHEET_ID) {
     if (!warnedMissingCredentials) {
       console.warn(
         "Google Sheets credentials not found. Using fallback local scores from environment values."
+      );
+      warnedMissingCredentials = true;
+    }
+
+    return {
+      teamA: Number(process.env.FALLBACK_TEAM_A || 135),
+      teamB: Number(process.env.FALLBACK_TEAM_B || 122)
+    };
+  }
+
+  if (!auth) {
+    if (!warnedMissingCredentials) {
+      console.warn(
+        "Google Sheets auth was not configured. Using fallback local scores from environment values."
       );
       warnedMissingCredentials = true;
     }

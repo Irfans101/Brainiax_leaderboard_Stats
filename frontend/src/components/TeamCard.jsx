@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import DigitalCounter from "./DigitalCounter";
 
-export default function TeamCard({ team, score, color, logo, progress }) {
+export default function TeamCard({ team, score, color, progress }) {
   return (
     <motion.article
       className="team-card"
@@ -10,10 +10,9 @@ export default function TeamCard({ team, score, color, logo, progress }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <img src={logo} alt={`${team} logo`} className="team-logo" />
       <h2>{team}</h2>
       <div className="score" style={{ color }}>
-        <DigitalCounter value={score} stepDelay={40} />
+        <DigitalCounter value={score} stepDelay={34} />
       </div>
       <div className="bar-track">
         <motion.div

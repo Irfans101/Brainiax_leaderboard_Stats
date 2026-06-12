@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import BrandIcon from "./BrandIcon";
 
 export default function LeaderBanner({ leader }) {
   const text = leader === "TIED" ? "MATCH TIED" : `${leader} LEADS`;
@@ -14,7 +15,8 @@ export default function LeaderBanner({ leader }) {
           exit={{ opacity: 0, y: -20, scale: 1.02 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          {text}
+          <BrandIcon className="leader-banner__watermark" />
+          <span className="leader-banner__text">{text}</span>
         </motion.div>
       </AnimatePresence>
     </div>

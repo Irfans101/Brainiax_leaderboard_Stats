@@ -140,7 +140,7 @@ export default function Scoreboard() {
       return "TIED";
     }
 
-    return score.teamA > score.teamB ? "TEAM A" : "TEAM B";
+    return score.teamA > score.teamB ? "HUNTERS" : "GLADIATORS";
   }, [score.teamA, score.teamB]);
 
   useEffect(() => {
@@ -211,17 +211,16 @@ export default function Scoreboard() {
           <span className="live-dot" />
           <span>{socketConnected ? "LIVE CONNECTED" : "NOT CONNECTED"}</span>
         </div>
-        <p className="kicker">BRAINIAX CHAMPIONS LEADERBOARD</p>
-        <h1 className="title">SALES BATTLE</h1>
+        <h1 className="title title--primary">BRAINIAX CHAMPIONS LEADERBOARD</h1>
+        <p className="title-secondary">SALES BATTLE</p>
         <p className="subtitle">{lastSyncLabel}</p>
       </motion.header>
 
       <div className="board">
         <TeamCard
-          team="TEAM A"
+          team="HUNTERS"
           score={score.teamA}
           color="#2dd4bf"
-          logo="/logos/team-a.svg"
           progress={teamAProgress}
         />
 
@@ -238,10 +237,9 @@ export default function Scoreboard() {
         </div>
 
         <TeamCard
-          team="TEAM B"
+          team="GLADIATORS"
           score={score.teamB}
-          color="#fb7185"
-          logo="/logos/team-b.svg"
+          color="#fbbf24"
           progress={teamBProgress}
         />
       </div>

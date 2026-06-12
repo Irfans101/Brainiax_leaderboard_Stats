@@ -6,5 +6,4 @@
     </linearGradient>
   </defs>
   <circle cx="60" cy="60" r="54" fill="url(#aGrad)"/>
-  <path d="M60 22L88 92H75L68 74H52L45 92H32L60 22ZM56 63H64L60 52L56 63Z" fill="#ffffff"/>
 </svg>

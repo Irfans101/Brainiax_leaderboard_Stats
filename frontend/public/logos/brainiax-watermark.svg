@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Brainiax logo watermark">
+  <defs>
+    <linearGradient id="brainiaxGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2b50d6"/>
+      <stop offset="55%" stop-color="#7e4cf4"/>
+      <stop offset="100%" stop-color="#ff4b93"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#brainiaxGrad)" stroke-linecap="round" stroke-width="14">
+    <path d="M38 70 L92 124"/>
+    <path d="M70 38 L124 92"/>
+    <path d="M96 64 L150 118"/>
+    <path d="M128 32 L182 86"/>
+    <path d="M58 150 L112 204"/>
+    <path d="M90 118 L144 172"/>
+    <path d="M122 150 L176 204"/>
+    <path d="M154 118 L208 172"/>
+  </g>
+</svg>
