@@ -220,8 +220,9 @@ export default function Scoreboard() {
         <TeamCard
           team="HUNTERS"
           score={score.teamA}
-          color="#2dd4bf"
+          color="#ff4fd8"
           progress={teamAProgress}
+          poster="/posters/hunters.png"
         />
 
         <div className="center-panel">
@@ -239,8 +240,9 @@ export default function Scoreboard() {
         <TeamCard
           team="GLADIATORS"
           score={score.teamB}
-          color="#fbbf24"
+          color="#38bdf8"
           progress={teamBProgress}
+          poster="/posters/gladiators.png"
         />
       </div>
 

@@ -1,22 +1,34 @@
 import { motion } from "framer-motion";
 import DigitalCounter from "./DigitalCounter";
 
-export default function TeamCard({ team, score, color, progress }) {
+export default function TeamCard({ team, score, color, progress, poster }) {
+  const slug = team.toLowerCase();
+
   return (
     <motion.article
-      className="team-card"
-      style={{ borderColor: color, boxShadow: `0 0 36px ${color}55` }}
+      className={`team-card team-card--${slug}`}
+      style={{
+        borderColor: color,
+        boxShadow: `0 0 36px ${color}55`
+      }}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
-      <h2>{team}</h2>
-      <div className="score" style={{ color }}>
-        <DigitalCounter value={score} stepDelay={34} />
+      <img
+        className="team-card__poster"
+        src={poster}
+        alt=""
+        draggable={false}
+      />
+
+      <div className="team-card__score-slot" aria-label={`${team} sales`}>
+        <DigitalCounter value={score} stepDelay={34} className="team-card__score" />
       </div>
-      <div className="bar-track">
+
+      <div className="team-card__bar-track" aria-hidden="true">
         <motion.div
-          className="bar-fill"
+          className="team-card__bar-fill"
           style={{ backgroundColor: color }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
