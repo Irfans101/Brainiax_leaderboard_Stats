@@ -22,10 +22,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 20% 20%, #1f5f99 0%, transparent 34%),
-    radial-gradient(circle at 80% 70%, #5a214a 0%, transparent 36%),
-    linear-gradient(140deg, var(--bg-0), var(--bg-1), var(--bg-2));
+  background: #03050c;
   color: var(--ink);
   font-family: "Rajdhani", sans-serif;
 }
@@ -34,54 +31,53 @@ body {
   position: relative;
   min-height: 100vh;
   height: 100vh;
-  padding: 12px 22px;
+  padding: clamp(88px, 14vh, 150px) 22px 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  background: #03050c;
 }
 
-.dashboard > * {
+.dashboard > *:not(.dashboard__bg):not(.tv-button):not(.live-status--corner) {
   position: relative;
   z-index: 1;
 }
 
-.dashboard::before {
-  width: min(760px, 92vw);
-  height: min(760px, 92vw);
-  left: 50%;
-  top: 42px;
-  transform: translateX(-50%);
-  border-radius: 0;
-  background: url("/logos/brainiax-watermark.svg") center/contain no-repeat;
-  opacity: 0.17;
-  filter: saturate(1.15);
-  animation: none;
+.dashboard__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #03050c;
 }
 
-.dashboard::after {
-  width: 340px;
-  height: 340px;
-  background: #fbbf241f;
-  right: -180px;
-  bottom: -120px;
-  border-radius: 50%;
-  filter: blur(65px);
-  animation: auraFloatB 9s ease-in-out infinite;
-}
-
-.dashboard::selection {
-  background: #ffffff30;
+.dashboard__bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  object-position: center center;
+  display: block;
+  user-select: none;
 }
 
 .dashboard::before,
 .dashboard::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
+  content: none;
 }
+
+.live-status--corner {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+  margin: 0;
+}
+
 
 .title-wrap {
   margin: 0 0 8px;
@@ -142,8 +138,12 @@ body {
   font-size: clamp(1.45rem, 2.6vw, 2.2rem);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #d8e6ff;
-  text-shadow: 0 0 18px #80a8ff44;
+  color: transparent;
+  background: linear-gradient(90deg, #ff4fd8 0%, #e0e7ff 48%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0 0 18px #80a8ff44);
 }
 
 .subtitle {
@@ -155,9 +155,9 @@ body {
 }
 
 .board {
-  width: min(1460px, 100%);
+  width: min(1540px, 100%);
   display: grid;
-  grid-template-columns: minmax(260px, 460px) minmax(200px, 1fr) minmax(260px, 460px);
+  grid-template-columns: minmax(280px, 500px) minmax(180px, 1fr) minmax(280px, 500px);
   gap: 20px;
   align-items: center;
   justify-content: center;
@@ -167,9 +167,9 @@ body {
   position: relative;
   width: auto;
   height: min(66vh, 560px);
-  max-width: 470px;
+  max-width: 510px;
   margin-inline: auto;
-  aspect-ratio: 0.79;
+  aspect-ratio: 0.78;
   border: 2px solid;
   border-radius: 22px;
   overflow: hidden;
@@ -198,9 +198,9 @@ body {
 .team-card__score-slot {
   position: absolute;
   left: 50%;
-  top: 26.5%;
+  top: 28%;
   transform: translate(-50%, -50%);
-  width: min(44%, 190px);
+  width: min(48%, 220px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -218,13 +218,13 @@ body {
 }
 
 .team-card--gladiators .team-card__score-slot {
-  top: 27.5%;
-  width: min(42%, 182px);
+  top: 29%;
+  width: min(46%, 210px);
 }
 
 .team-card__score {
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(2.7rem, 5.4vw, 4.6rem);
+  font-size: clamp(3.4rem, 6.4vw, 5.8rem);
   line-height: 0.9;
   letter-spacing: 0.04em;
   color: #ffffff;
@@ -421,6 +421,7 @@ body {
   position: absolute;
   top: 16px;
   right: 16px;
+  z-index: 5;
   border: 0;
   border-radius: 10px;
   padding: 10px 14px;
@@ -446,13 +447,7 @@ body {
     height: auto;
     min-height: 100vh;
     overflow: auto;
-    padding: 18px 14px 28px;
-  }
-
-  .dashboard::before {
-    width: min(420px, 88vw);
-    height: min(420px, 88vw);
-    top: 70px;
+    padding: 72px 14px 28px;
   }
 
   .title--primary {
@@ -483,7 +478,7 @@ body {
   }
 
   .team-card__score {
-    font-size: clamp(1.9rem, 8vw, 3rem);
+    font-size: clamp(2.4rem, 9vw, 3.8rem);
   }
 
   .leader-banner__text {

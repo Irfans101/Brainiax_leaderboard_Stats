@@ -195,26 +195,25 @@ export default function Scoreboard() {
 
   return (
     <div className={`dashboard ${isTvRoute ? "tv-mode" : ""}`}>
+      <div className="dashboard__bg" aria-hidden="true">
+        <img
+          className="dashboard__bg-image"
+          src="/backgrounds/sales-battle-arena.png"
+          alt=""
+          draggable={false}
+        />
+      </div>
+
       {!isTvRoute ? (
         <button className="tv-button" onClick={requestFullscreen}>
           Enter TV Fullscreen
         </button>
       ) : null}
 
-      <motion.header
-        className="title-wrap"
-        initial={{ opacity: 0, y: -28 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <div className={`live-status ${socketConnected ? "live-on" : "live-off"}`}>
-          <span className="live-dot" />
-          <span>{socketConnected ? "LIVE CONNECTED" : "NOT CONNECTED"}</span>
-        </div>
-        <h1 className="title title--primary">BRAINIAX CHAMPIONS LEADERBOARD</h1>
-        <p className="title-secondary">SALES BATTLE</p>
-        <p className="subtitle">{lastSyncLabel}</p>
-      </motion.header>
+      <div className={`live-status live-status--corner ${socketConnected ? "live-on" : "live-off"}`}>
+        <span className="live-dot" />
+        <span>{socketConnected ? "LIVE CONNECTED" : "NOT CONNECTED"}</span>
+      </div>
 
       <div className="board">
         <TeamCard
